@@ -5,7 +5,6 @@ import sqlite3
 import csv
 import argparse
 from datetime import (datetime, timedelta)
-import re
 
 __author__ = 'peter@phyn3t.com'
 
@@ -20,11 +19,11 @@ class Koku(object):
     """ Contains a single entry in a koku database
     """
 
-    apple_time = datetime(2001,1,1)
+    apple_time = datetime(2001, 1, 1)
 
     def __init__(self, row):
         self.date = self.get_date(row[1])
-        self.value = self.get_value(row[2],row[3])
+        self.value = self.get_value(row[2], row[3])
         self.description = row[4] if not row[4] is None else 'Unknown'
         self.category = row[5] if not row[5] is None else 'Unknown'
 
@@ -51,16 +50,15 @@ class Koku(object):
         return "{}-{}-{}".format(date.day, date.month, date.year)
 
 
-
 def main():
     """ main duuu
     """
 
     parser = argparse.ArgumentParser(description='Convert Koku DB to csv')
     parser.add_argument('--database', help='Koku sqlite database path',
-            required=True)
+                        required=True)
     parser.add_argument('--output', help='Output csv file path',
-            required=True)
+                        required=True)
     args = parser.parse_args()
 
     conn = sqlite3.connect(args.database)
